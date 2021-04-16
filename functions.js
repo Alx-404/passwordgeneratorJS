@@ -56,14 +56,36 @@ function generatePassword(){
             document.getElementById("length").value = length     
         }
 
-        password=""
-        for (var i=1;i<=length;i++){
-            char=selectedChars[getRandomInt(0,selectedChars.length)]
-            password+=char
+        featuresUsedInPasswordGeneration = []
+
+        // It keeps generating password until it has all the selected features
+        while (featuresUsedInPasswordGeneration.length != numberOfSelectedFeatures) {
+            featuresUsedInPasswordGeneration = []
+            password=""
+
+            for (var i=1;i<=length;i++){
+                char=selectedChars[getRandomInt(0,selectedChars.length)]
+                password+=char
+
+                // Discover the char list of the current char and if it's not in the used features list, it's stored in it.
+                for (var j = 0; j < numberOfSelectedFeatures; j++) {
+                    charListOfFeature = selectedFeatures[j]
+                    isCharInCharList = charListOfFeature.includes(char)
+
+                    if (isCharInCharList) {
+                        isCharListNotInUsedFeatures = !featuresUsedInPasswordGeneration.includes(charListOfFeature)
+
+                        if (isCharListNotInUsedFeatures) {
+                            featuresUsedInPasswordGeneration.push(charListOfFeature)
+                        }
+
+                    break
+                    }
+                }
+            }
         }
 
         document.getElementById("passwordprint").value=password
-
     }
 }
             
