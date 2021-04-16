@@ -49,7 +49,13 @@ function generatePassword(){
     chkForSelectedFeatures = numberOfSelectedFeatures > 0
 
     if (chkForSelectedFeatures) {
-    
+
+        // Increase the password length, if necessary, to make room for all the selected features 
+        if (length < numberOfSelectedFeatures) {
+            length = numberOfSelectedFeatures
+            document.getElementById("length").value = length     
+        }
+
         password=""
         for (var i=1;i<=length;i++){
             char=selectedChars[getRandomInt(0,selectedChars.length)]
