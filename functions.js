@@ -28,23 +28,36 @@ function generatePassword(){
     if(chkDigitis){
         selectedChars+=di
         selectedFeatures.push(di)
-    }if(chkUppercase){
+    }
+    
+    if(chkUppercase){
         selectedChars+=uc
         selectedFeatures.push(uc)
-    }if(chkLowercase){
+    }
+    
+    if(chkLowercase){
         selectedChars+=lc
         selectedFeatures.push(lc)
-    }if(chkSpecialChars){
+    }
+    
+    if(chkSpecialChars){
         selectedChars+=sp
         selectedFeatures.push(sp)
     }
-    
-    password=""
-    for (var i=1;i<=length;i++){
-        char=selectedChars[getRandomInt(1,selectedChars.length)]
-        password+=char
-    }
 
-    document.getElementById("passwordprint").value=password
+    numberOfSelectedFeatures = selectedFeatures.length
+    chkForSelectedFeatures = numberOfSelectedFeatures > 0
+
+    if (chkForSelectedFeatures) {
+    
+        password=""
+        for (var i=1;i<=length;i++){
+            char=selectedChars[getRandomInt(0,selectedChars.length)]
+            password+=char
+        }
+
+        document.getElementById("passwordprint").value=password
+
+    }
 }
             
